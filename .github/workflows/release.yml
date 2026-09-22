@@ -5,6 +5,7 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+
 jobs:
   build:
     name: Build & Release
@@ -21,15 +22,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-
       - name: Build APK (Release)
         run: flutter build apk --release --no-shrink
 
       - name: Build App Bundle (AAB)
         run: flutter build appbundle --release --no-shrink
 
-- name: Upload APK Artifact
-  uses: actions/upload-artifact@v4
-  with:
-    name: zefirka-voice-remote-apk
-    path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zefirka-voice-remote-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
