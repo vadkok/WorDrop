@@ -28,12 +28,8 @@ jobs:
       - name: Build App Bundle (AAB)
         run: flutter build appbundle --release --no-shrink
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+- name: Upload APK Artifact
+  uses: actions/upload-artifact@v4
+  with:
+    name: zefirka-voice-remote-apk
+    path: build/app/outputs/flutter-apk/app-release.apk
